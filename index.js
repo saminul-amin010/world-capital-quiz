@@ -8,18 +8,22 @@ const db = new pg.Client({
   database: "world",
   password: "Qwerty@12345",
   port: 5432,
-})
+});
 
 const app = express();
 const port = 3000;
 
 db.connect();
 
-// let quiz = [
-//   { country: "France", capital: "Paris" },
-//   { country: "United Kingdom", capital: "London" },
-//   { country: "United States of America", capital: "New York" },
-// ];
+let quiz = [];
+db.query("SELECT * FROM capital", (err, res) => {
+  if (err) {
+    console.error("Error executing query", err.stack);
+  } else {
+    quiz = res.rows;
+  }
+  db.end();
+});
 
 let totalCorrect = 0;
 
