@@ -1,14 +1,25 @@
 import express from "express";
 import bodyParser from "body-parser";
+import pg from "pg";
+
+const db = new pg.Client({
+  user: "postgres",
+  host: "localhost",
+  database: "world",
+  password: "Qwerty@12345",
+  port: 5432,
+})
 
 const app = express();
 const port = 3000;
 
-let quiz = [
-  { country: "France", capital: "Paris" },
-  { country: "United Kingdom", capital: "London" },
-  { country: "United States of America", capital: "New York" },
-];
+db.connect();
+
+// let quiz = [
+//   { country: "France", capital: "Paris" },
+//   { country: "United Kingdom", capital: "London" },
+//   { country: "United States of America", capital: "New York" },
+// ];
 
 let totalCorrect = 0;
 
